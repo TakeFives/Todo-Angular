@@ -1,0 +1,27 @@
+<h3>Edit task name:</h3>
+<form
+  class="form"
+  [formGroup]="editTaskForm"
+  (submit)="editTask()"
+>
+  <input
+    formControlName="name"
+    class="add-task-input"
+    type="text"
+    placeholder="enter task's new name"
+  />
+  <div class="validation" *ngIf="editTaskForm.get('name')?.invalid && editTaskForm.get('name')?.touched">
+    <span *ngIf="editTaskForm.get('name')?.errors?.['required']">Name field can not be empty</span>
+    <span *ngIf="editTaskForm.get('name')?.errors?.['restrictedName']">this name is not allowed</span>
+    <span *ngIf="editTaskForm.get('name')?.errors?.['minlength']"> Please enter 
+      {{(editTaskForm.get('name')?.errors?.['minlength']?.['requiredLength']) - (editTaskForm.get('name')?.errors?.['minlength']?.['actualLength'])}} more symbols.
+    </span>
+  </div>
+  <button
+      type="submit"
+      [disabled]="!editTaskForm.valid"
+      class="button button-submit"
+    >
+      Update Name
+    </button>
+</form>

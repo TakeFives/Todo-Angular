@@ -1,0 +1,29 @@
+<div class="wrapper">
+  <div class="top-bar">
+    <h1 class="title">{{ title }}</h1>
+    <app-filter (filterTermEvent)="getFilterValue($event)"></app-filter>
+    <app-sort 
+    (selectedItemEvent)="onSelectedValue($event)" 
+    (ascEvent)="onSortOrder($event)"
+    (descEvent)="onSortOrder($event)"
+    ></app-sort>
+  </div>
+
+  <div class="board-list" >
+    <button (click)="[modalService.open(), (mode = 'add')]" class="add-board" title="create new board"></button>
+     <app-board
+      *ngFor="let board of boards$ | async | filter: filterValue | sort: [sortSelect, sortOrder]"
+      [board]="board"
+      (modeChangeEvent)="changeMode($event)"
+      (getBoardEvent)="getBoard($event)"
+      (click)="goToBoard(board.id)"
+    ></app-board>
+    <ng-template #loading>Loading...</ng-template>
+
+    <app-modal *ngIf="modalService.isVisible$ | async" [title]="mode === 'edit'? 'Edit board: ' + board!.name: 'Create board'">
+      <app-create-board *ngIf="mode === 'add'"></app-create-board>
+      <app-edit-board *ngIf="mode === 'edit'" [board]="board"></app-edit-board>
+    </app-modal>
+
+  </div>
+</div>

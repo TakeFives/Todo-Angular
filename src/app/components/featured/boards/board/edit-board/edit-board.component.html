@@ -1,0 +1,33 @@
+<form class="form" [formGroup]="editBoardForm" (ngSubmit)="submit(board?.id)">
+  <div class="old-board-name" *ngIf="visible; else elseBlock">
+    <div>{{ board?.name }}</div>
+    <button (click)="visible = false" class="button button-edit" title="Edit">change</button>
+  </div>
+  <ng-template #elseBlock>
+    <label for="name" class="label">New name:</label>
+    <input
+      formControlName="name"
+      id="name"
+      type="text"
+      class="input input-text"
+      placeholder="{{ board?.name }}"
+      value="{{ board?.name }}"
+    />
+    <div class="validation" *ngIf="editBoardForm.get('name')?.invalid && editBoardForm.get('name')?.touched">
+      <span *ngIf="editBoardForm.get('name')?.errors?.['required']">Name field can not be empty</span>
+      <span *ngIf="editBoardForm.get('name')?.errors?.['restrictedName']">this name is not allowed</span>
+      <span *ngIf="editBoardForm.get('name')?.errors?.['minlength']"> Please enter min 3 symbols length name. Only
+        {{(editBoardForm.get('name')?.errors?.['minlength']?.['requiredLength']) - (editBoardForm.get('name')?.errors?.['minlength']?.['actualLength'])}} symbols left.
+      </span>
+    </div>
+    <button
+      type="submit"
+      [disabled]="!editBoardForm.valid"
+      class="button button-submit"
+    >
+      Update Name
+    </button>
+  </ng-template>
+
+  <div class="board-description">{{ board?.description }}</div>
+</form>

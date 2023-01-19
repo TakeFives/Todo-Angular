@@ -1,0 +1,42 @@
+
+<app-modal *ngIf="modalService.isVisible$ | async" [title]="'Log in'" [ngStyle]="{'background-color': 'gold'}">
+  
+  <div class="login-box">
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+
+      <div class="error" *ngIf="errorService.error$ | async as error">{{error}}. Try again.</div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" formControlName="username" />
+        <div class="validation" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+          <span *ngIf="loginForm.get('username')?.errors?.['required']">Name field can not be empty</span>
+          <span *ngIf="loginForm.get('username')?.errors?.['minlength']"> Please enter min 3 symbols length name. Only
+            {{(loginForm.get('username')?.errors?.['minlength']?.['requiredLength']) - (loginForm.get('username')?.errors?.['minlength']?.['actualLength'])}} symbols left.
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" />
+        <div class="validation" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          <span *ngIf="loginForm.get('password')?.errors?.['required']">Name field can not be empty</span>
+          <span *ngIf="loginForm.get('password')?.errors?.['minlength']"> Please enter min 5 symbols length name. Only
+            {{(loginForm.get('password')?.errors?.['minlength']?.['requiredLength']) - (loginForm.get('password')?.errors?.['minlength']?.['actualLength'])}} symbols left.
+          </span>
+        </div>
+      </div>
+      <div class="form-group submit-nav">
+        <button [disabled]="loginForm.invalid || submitted" class="button button-submit">Login</button>
+        <span>or</span>
+        <a routerLink="register">Register</a>
+      </div>
+
+    </form>
+    
+  </div>
+
+</app-modal>
+
+

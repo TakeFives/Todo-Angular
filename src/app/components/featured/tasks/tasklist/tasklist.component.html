@@ -1,0 +1,41 @@
+<div
+  *ngIf="list"
+  class="todo tasks-group"
+  [ngStyle]="{ 'background-color': bgColor }"
+  appDropZone
+  (drop)="move(list.status)"
+>
+  <h2 class="task-group-heading">{{ list.title }}</h2>
+  <ul class="tasks-list">
+    <app-create-task
+      [status]="list.status"
+      [board]="boardId"
+      [list]="list.tasks"
+    ></app-create-task>
+    <li
+      *ngFor="
+        let taska of list.tasks
+          | filter: filterValue
+          | sort: [sortSelect, sortOrder]
+      "
+      appDraggable
+      (dragstart)="[setCurrentTask(taska), setCurrentList(list.tasks)]"
+    >
+      <app-task
+        [task]="taska"
+        [boardId]="boardId"
+        [list]="list.tasks"
+        (editTaskEvent)="setCurrentEditTask($event)"
+        (editTaskList)="setCurrentTaskEditList($event)"
+      ></app-task>
+    </li>
+  </ul>
+  <div class="bgcolor">
+    <input
+      class="bgcolor-selection"
+      type="color"
+      (change)="setColor($event)"
+      title="change color"
+    />
+  </div>
+</div>

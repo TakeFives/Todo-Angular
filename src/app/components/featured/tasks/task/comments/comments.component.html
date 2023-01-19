@@ -1,0 +1,11 @@
+<div class="comment-box">
+  <app-create-comment [taskId]="taskId" [boardId]="boardId"></app-create-comment>
+  
+  <div class="comments-count">Comments: {{ comments ? comments.length : 0 }}</div>
+  <div class="comment-list" *ngFor="let comment of comments">
+    <div class="comment" *ngIf="comments">
+      <span> {{ comment.text }}</span>
+      <button (click)="deleteComment(comment, $event)" class="close">x</button>
+    </div>
+  </div>
+</div>

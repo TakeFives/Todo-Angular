@@ -1,0 +1,49 @@
+.comment-box {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.comments-count{
+  font-size: 0.9em;
+  color: #0005;
+}
+.comment-list {
+
+  .comment {
+    background-color: #ddd5;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+
+    .close {
+      width: 20px;
+      height: 20px;
+      background-color: transparent;
+      overflow: hidden;
+      text-indent: -9999px;
+      opacity: 0.3;
+      position: relative;
+      margin-left: auto;
+
+      &:hover {
+        opacity: 1;
+      }
+      &:before, &:after {
+        position: absolute;
+        left: 10px;
+        content: ' ';
+        height: 16px;
+        width: 2px;
+        background-color: #333;
+      }
+      &:before {
+        transform: rotate(45deg);
+      }
+      &:after {
+        transform: rotate(-45deg);
+      }
+    }
+    
+  }
+}

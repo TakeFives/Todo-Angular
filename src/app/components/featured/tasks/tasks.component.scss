@@ -1,0 +1,17 @@
+.tasks-groups {
+  display: flex;
+  gap: 1em;
+}
+
+.delete-board-button{
+  background-color: #ff0000;
+  height: 40px;
+}
+
+@media (max-width: 768px) {
+  .tasks-groups{
+    flex-direction: column;
+    align-items: center;
+
+  }
+}

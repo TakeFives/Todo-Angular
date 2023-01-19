@@ -1,0 +1,117 @@
+input[type="checkbox"]:checked ~ #auth-nav {
+  right: 0;
+}
+input[type=checkbox] {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  display: none;
+}
+.sidebarIconToggle {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: absolute;
+  z-index: 99;
+  height: 22px;
+  width: 22px;
+  display: none;
+  top: 28px;
+}
+.spinner {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background-color: #fff;
+}
+.horizontal {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  margin-top: 3px;
+}
+.diagonal.part-1 {
+  position: relative;
+  transition: all 0.3s;
+  box-sizing: border-box;
+  float: left;
+}
+.diagonal.part-2 {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  margin-top: 3px;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  opacity: 0;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  transform: rotate(135deg);
+  margin-top: 8px;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  transform: rotate(-135deg);
+  margin-top: -9px;
+}
+
+.auth-nav {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  transition: right 0.4s;
+
+  .nav {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1em;
+
+    li + li {
+      border-left: 1px solid #ddd;
+      padding-left: 1em;
+    }
+
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
+  }
+
+  h2 {
+    color: #fff;
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-nav {
+    width: 300px;
+    height: 100vh;
+    right: -300px;
+    top: 0;
+    background-color: gold;
+    position: absolute;
+    z-index: 1;
+    flex-direction: column;
+    display: block;
+    box-sizing: border-box;
+    padding-top: 50px;
+    text-align: center;
+
+    .nav{
+      justify-content: center;
+    }
+  }
+
+  .sidebarIconToggle{
+    display:block
+ }
+}

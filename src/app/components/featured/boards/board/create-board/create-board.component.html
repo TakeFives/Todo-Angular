@@ -1,0 +1,33 @@
+<form class="form" [formGroup]="createBoardForm" (ngSubmit)="submit()">
+  <label for="name" class="label">Name:</label>
+  <input
+    formControlName="name"
+    id="name"
+    type="text"
+    class="input input-text"
+    placeholder="Write any name"
+  />
+  <div class="validation" *ngIf="createBoardForm.get('name')?.invalid && createBoardForm.get('name')?.touched">
+    <span *ngIf="createBoardForm.get('name')?.errors?.['required']">Name field can not be empty</span>
+    <span *ngIf="createBoardForm.get('name')?.errors?.['restrictedName']">This name is not allowed</span>
+    <span *ngIf="createBoardForm.get('name')?.errors?.['minlength']"> Please enter min 3 symbols length name. Only
+      {{(createBoardForm.get('name')?.errors?.['minlength']?.['requiredLength']) - (createBoardForm.get('name')?.errors?.['minlength']?.['actualLength'])}} symbols left.
+    </span>
+  </div>
+  <label for="dicr" class="label">Description:</label>
+  <textarea
+    formControlName="description"
+    id="dicr"
+    type="text"
+    class="textarea"
+  ></textarea>
+  <div class="validation" *ngIf="createBoardForm.get('description')?.invalid && createBoardForm.get('description')?.touched">
+    <span *ngIf="createBoardForm.get('description')?.errors?.['required']">Description field can not be empty</span>
+    <span *ngIf="createBoardForm.get('description')?.errors?.['minlength']"> Please enter min 10 symbols description. Only
+      {{(createBoardForm.get('description')?.errors?.['minlength']?.['requiredLength']) - (createBoardForm.get('description')?.errors?.['minlength']?.['actualLength'])}} symbols left.
+    </span>
+  </div>
+  <button type="submit" class="button button-submit" [disabled]="createBoardForm.invalid">
+    Create
+  </button>
+</form>

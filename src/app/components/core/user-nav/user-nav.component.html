@@ -1,0 +1,18 @@
+<input type="checkbox"  class="openSidebarMenu" id="openSidebarMenu">
+<label for="openSidebarMenu" class="sidebarIconToggle">
+    <div class="spinner diagonal part-1"></div>
+    <div class="spinner horizontal"></div>
+    <div class="spinner diagonal part-2"></div>
+</label>
+<nav class="auth-nav" id="auth-nav">
+  <h2>Welcome, {{ username | uppercase }}</h2>
+  <ul class="nav" *ngIf="this.authService.isAuthenticated()">
+    <li>
+      <a>My account</a>
+    </li>
+    <li>
+      <a routerLink="/auth" (click)="this.authService.logout()">Log out</a>
+    </li>
+  </ul>
+</nav>
+

@@ -1,0 +1,25 @@
+<div class="sort-box">
+  <select 
+    #select 
+    (change)="onSelected($event)"
+    class="sort-dropdown" 
+  >
+    <option value="name" class="sort-option" default>Sort by Name</option>
+    <option value="createdAt" class="sort-option">Sort by Date</option>
+    <option value="tasks" class="sort-option">Sort by Tasks</option>
+  </select>
+  
+  <button 
+  class="sort-az-button" 
+  (click)="onDesc($event)"
+  value="desc"
+  >
+    
+    </button>
+  <button 
+  class="sort-za-button"
+  (click)="onAsc($event)"
+  value="asc"
+  >
+  </button>
+</div>

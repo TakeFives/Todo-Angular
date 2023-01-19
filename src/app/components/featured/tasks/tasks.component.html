@@ -1,0 +1,40 @@
+<div class="wrapper">
+  <div class="top-bar">
+    <h1 *ngIf="board" class="title">{{ board.name }}</h1>
+    <app-filter (filterTermEvent)="getFilterValue($event)"></app-filter>
+    <app-sort
+      (selectedItemEvent)="onSelectedValue($event)"
+      (ascEvent)="onSortOrder($event)"
+      (descEvent)="onSortOrder($event)"
+    ></app-sort>
+    <button class="delete-board-button" (click)="deleteBoard(board)">
+      Delete board
+    </button>
+  </div>
+
+  <div>
+    <div *ngIf="loading">Loading...</div>
+
+    <div class="tasks-groups">
+      <div *ngFor="let list of taskLists | sort: [sortSelect, sortOrder]">
+        <app-tasklist
+          [boardId]="boardId"
+          [list]="list"
+          [outTask]="outTask"
+          [outList]="outList"
+          [filterValue]="filterValue"
+          [sortSelect]="sortSelect"
+          [sortOrder]="sortOrder"
+          (currentTask)="setOutTask($event)"
+          (currentList)="setOutList($event)"
+          (currentTaskEdit)="setOutTaskEdit($event)"
+          (currentEditList)="setOutEditList($event)"
+        ></app-tasklist>
+      </div>
+    </div>
+
+    <app-modal *ngIf="modalService.isVisible$ | async">
+      <app-edit-task [task]="outTaskEdit" [list]="outEditList"></app-edit-task>
+    </app-modal>
+  </div>
+</div>

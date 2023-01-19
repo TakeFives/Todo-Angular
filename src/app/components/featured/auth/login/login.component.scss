@@ -1,0 +1,24 @@
+.login-box{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 5px;
+  
+
+  .login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .form-group{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      &.submit-nav{
+        align-self: center;
+        text-align: center;
+      }
+    }
+  }
+}

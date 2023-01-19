@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  box-sizing: border-box;
+}
+button {
+  border:none;
+  border-radius: 5px;
+  padding: 0.2em 0.6em;
+  width: fit-content;
+  background-color: #4682b4;
+  color: #fff;
+}
+button:hover {
+  cursor: pointer;
+  background-color: #5899cf;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%;
+}
+
+input,
+select {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  padding: 10px 14px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  min-height: 40px;
+}
+
+textarea{
+  border: 1px solid #ddd;
+  padding: 10px 4px;
+  border-radius: 5px;
+
+  &.ng-invalid.ng-touched{
+    border: 1px solid #f00;
+  }
+  &.ng-valid.ng-touched{
+    border: 1px solid #12af12;
+  }
+
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+input{
+  &.ng-invalid.ng-touched{
+    border: 1px solid #f00;
+  }
+  &.ng-valid.ng-touched{
+    border: 1px solid #12af12;
+  }
+}

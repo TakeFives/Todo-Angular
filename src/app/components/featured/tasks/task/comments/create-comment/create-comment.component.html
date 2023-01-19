@@ -1,0 +1,25 @@
+<div class="add-comment-box">
+  <form class="form" [formGroup]="createCommentForm">
+    <textarea
+      formControlName="comment"
+      name="comment"
+      id="comment"
+      cols="24"
+      rows="3"
+      (blur)="addComment()"
+    ></textarea>
+
+    <div class="validation" *ngIf="createCommentForm.get('text')?.invalid && createCommentForm.get('text')?.touched">
+      <span *ngIf="createCommentForm.get('text')?.errors?.['required']">Name field can not be empty</span>
+      <span *ngIf="createCommentForm.get('text')?.errors?.['minlength']"> Please enter min 4 characters.</span>
+    </div>
+
+    <!-- <button
+      (click)="addComment($event)"
+      [disabled]="createCommentForm.invalid"
+      class="button button-submit"
+    >
+      add comment
+    </button> -->
+  </form>
+</div>

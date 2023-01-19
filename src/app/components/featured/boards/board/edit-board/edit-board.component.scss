@@ -1,0 +1,13 @@
+.old-board-name{
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #eee;
+
+  button{
+    justify-self: end;
+    margin-left: auto;
+    align-self: center;
+  }
+}

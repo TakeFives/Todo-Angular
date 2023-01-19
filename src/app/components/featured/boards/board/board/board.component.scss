@@ -1,0 +1,88 @@
+.board {
+  background-color: #f0f8ff;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  width: 250px;
+  height: fit-content;
+  border-radius: 5px;
+  gap: 1em;
+  box-sizing: border-box;
+  transition: background-color 0.4s;
+
+  .board-heading {
+    margin: 0;
+    text-align: center;
+  }
+  .board-description{
+    overflow-wrap: anywhere;
+  }
+  .board-tasks {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 5px;
+    position: relative;
+
+
+    &::after {
+      content: "";
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" id="Bold" viewBox="0 0 24 24" width="512" height="512"><path d="M1.51,6.079a1.492,1.492,0,0,1,1.06.44l7.673,7.672a2.5,2.5,0,0,0,3.536,0L21.44,6.529A1.5,1.5,0,1,1,23.561,8.65L15.9,16.312a5.505,5.505,0,0,1-7.778,0L.449,8.64A1.5,1.5,0,0,1,1.51,6.079Z"/></svg>');
+      background-size: 20px 20px;
+      right: 10px;
+      color: #000;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    .board-task-statuses {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .board-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    .button-view {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      background-color: #4682b4;
+      border-radius: 5px;
+      margin-right: auto;
+      justify-self: flex-start;
+
+      &::after {
+        content: "";
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 513.749 513.749" style="enable-background:new 0 0 513.749 513.749;" xml:space="preserve" width="512" height="512"> <g> <path d="M504.352,459.061l-99.435-99.477c74.402-99.427,54.115-240.344-45.312-314.746S119.261-9.277,44.859,90.15   S-9.256,330.494,90.171,404.896c79.868,59.766,189.565,59.766,269.434,0l99.477,99.477c12.501,12.501,32.769,12.501,45.269,0   c12.501-12.501,12.501-32.769,0-45.269L504.352,459.061z M225.717,385.696c-88.366,0-160-71.634-160-160s71.634-160,160-160   s160,71.634,160,160C385.623,314.022,314.044,385.602,225.717,385.696z"/> </g></svg>');
+        filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(163deg)
+          brightness(113%) contrast(101%);
+        background-size: 60%;
+        top: 0;
+        background-position: center;
+        background-repeat: no-repeat;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+      }
+    }
+  }
+  .board-date {
+    font-size: 0.7em;
+    font-weight: 700;
+    color: #0004;
+  }
+
+  &:hover {
+    background-color: gold;
+    cursor: pointer;
+  }
+}

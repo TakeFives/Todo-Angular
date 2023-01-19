@@ -1,0 +1,31 @@
+<div class="add-task-box">
+  <button
+    *ngIf="addButton"
+    (click)="toggleView()"
+    class="add-task-button"
+    title="add new task"
+  >
+    +
+  </button>
+  <form
+    class="form"
+    [formGroup]="createTaskForm"
+    (ngSubmit)="addTask($event, status, board)"
+    *ngIf="addForm"
+  >
+    <input
+      formControlName="name"
+      class="add-task-input"
+      type="text"
+      placeholder="enter task name"   
+      (blur)="addButton=true; addForm=false"
+    />
+    <div class="validation" *ngIf="createTaskForm.get('name')?.invalid && createTaskForm.get('name')?.touched">
+      <span *ngIf="createTaskForm.get('name')?.errors?.['required']">Name field can not be empty</span>
+      <span *ngIf="createTaskForm.get('name')?.errors?.['restrictedName']">this name is not allowed</span>
+      <span *ngIf="createTaskForm.get('name')?.errors?.['minlength']"> Please enter 
+        {{(createTaskForm.get('name')?.errors?.['minlength']?.['requiredLength']) - (createTaskForm.get('name')?.errors?.['minlength']?.['actualLength'])}} more symbols.
+      </span>
+    </div>
+  </form>
+</div>

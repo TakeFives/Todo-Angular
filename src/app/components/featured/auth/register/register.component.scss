@@ -1,0 +1,22 @@
+.register-box{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  .register-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .form-group{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      &.submit-nav{
+        align-self: center;
+        text-align: center;
+      }
+    }
+  }
+}

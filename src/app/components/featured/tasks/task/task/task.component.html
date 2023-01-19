@@ -1,0 +1,61 @@
+<div class="task" [ngClass]="task && task.archived ? 'archived' : ''">
+  <div class="task-name">{{ task? task.name : '' }}</div>
+
+  <div class="task-toggle-controls" (click)="toggleControls($event)">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      id="Outline"
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+    >
+      <circle cx="12" cy="2" r="2" />
+      <circle cx="12" cy="12" r="2" />
+      <circle cx="12" cy="22" r="2" />
+    </svg>
+  </div>
+
+  <div *ngIf="controls" class="task-controls" (click)="toggleControls($event)">
+    <button
+      *ngIf="!task.archived"
+      [ngStyle]="commentBox ? {'background-color':'gold'}: null"
+      class="task-comment-button button-comment button"
+      (click)="[toggleCommentBox($event), getComments($event, task.id)]"
+      title="ckick to add some comment"
+    >
+      comment
+    </button>
+
+    <button
+      *ngIf="!task.archived"
+      class="task-archive-button button-archive button"
+      (click)="archiveTask($event, task)"
+      title="archive task"
+    >
+      edit
+    </button>
+
+    <button
+      *ngIf="!task.archived"
+      class="task-edit-button button-edit button"
+      (click)="[modalService.open(), setEditTask(task), setEditTaskList(list)]"
+      title="edit task"
+    >
+      edit
+    </button>
+
+    <button
+      (click)="deleteTask($event, task)"
+      class="task-delete-button button-delete button"
+      title="delete task"
+    >
+      delete
+    </button>
+  </div>
+</div>
+
+<app-comments
+  *ngIf="commentBox"
+  [boardId]="boardId"
+  [taskId]="task.id"
+></app-comments>
