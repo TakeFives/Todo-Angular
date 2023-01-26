@@ -30,19 +30,21 @@ export class TasksComponent implements OnInit, OnDestroy {
     {
       title: 'todo',
       status: 'to do',
-      tasks: [] as Task[] | undefined
+      tasks: []! as Task[]
     },
     {
       title: 'in progress',
       status: 'in progress',
-      tasks: [] as Task[]
+      tasks: []! as Task[]
     },
     {
       title: 'done',
       status: 'done',
-      tasks: [] as Task[]
+      tasks: []! as Task[]
     }
   ]
+
+  filteredLists!: any[];
 
   outTask!: Task;
   outList!: Task[];
@@ -69,27 +71,27 @@ export class TasksComponent implements OnInit, OnDestroy {
       this.boardId = +params['id']
     }))
 
-    // this.store.dispatch({ type: '[App] Load Boards' });
-
     this.subscription = this.board$
-      .subscribe((board) => {  
-        if(board) {
+      .subscribe((board) => {
+        if (board) {
           this.board = board
 
-          if(this.board.tasks){
+          if (this.board.tasks) {
             this.taskLists[0].tasks = this.board.tasks.filter(task => task.status === 'to do');
             this.taskLists[1].tasks = this.board.tasks.filter(task => task.status === 'in progress');
             this.taskLists[2].tasks = this.board.tasks.filter(task => task.status === 'done');
           }
           this.loading = false
-        } 
+        }
       })
+
+      this.filteredLists = [...this.taskLists]
   }
 
-  
+
   deleteBoard(board: Board) {
     this.router.navigate([''])
-    this.store.dispatch({type: '[Board Component] Delete Board', board})
+    this.store.dispatch({ type: '[Board Component] Delete Board', board })
   }
 
   // drag and drop
@@ -103,18 +105,67 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   // sort and filter 
 
-  getFilterValue(value: string) {
-    this.filterValue = value
+  filterLists(value: string) {
+    
+    this.filteredLists = this.taskLists
+      .filter(list => {
+        if (!value?.trim()) return list
+
+        if (list.tasks) {
+          return list.title.toLowerCase().includes(value ? value.toLowerCase() : '')
+          ||
+          list.tasks.some((task: { name: string; }) => task.name.toLowerCase().includes(value ? value.toLowerCase() : ''))
+        } else {
+          return list.title.toLowerCase().includes(value ? value.toLowerCase() : '')
+        }
+      })
+
   }
 
   onSelectedValue(value: string) {
     this.sortSelect = value
+    this.sortLists();
   }
 
   onSortOrder(value: string) {
     this.sortOrder = value
+    this.sortLists();
   }
-  
+
+  sortLists() {
+    const sortedList = [...this.taskLists]
+
+    let mult = 1
+    if (this.sortOrder === 'desc') {
+      mult = -1
+    }
+    if (this.sortSelect === 'tasks') {
+      sortedList.sort((a: any, b: any) => {
+        if (a[this.sortSelect].length < b[this.sortSelect].length) {
+          return -1 * mult;
+        } else if (a[this.sortSelect].length > b[this.sortSelect].length) {
+          return 1 * mult;
+        } else {
+          return 0;
+        }
+      })
+    }
+    sortedList
+      .map((list) => {
+        list.tasks.sort((a: any, b: any) => {
+          if (a[this.sortSelect] < b[this.sortSelect]) {
+            return -1 * mult;
+          } else if (a[this.sortSelect] > b[this.sortSelect]) {
+            return 1 * mult;
+          } else {
+            return 0;
+          }
+        })
+      })
+
+    this.taskLists = [...sortedList]
+  }
+
   // edit task
 
   setOutTaskEdit(task: Task) {
@@ -124,7 +175,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.outEditList = list
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe()
   }
 }

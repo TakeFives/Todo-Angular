@@ -25,10 +25,6 @@ export class TasklistComponent implements OnInit{
   @Output() currentList = new EventEmitter<Task[]>()
   @Output() currentEditList = new EventEmitter<Task[]>()
 
-  @Input() filterValue?: string;
-  @Input() sortSelect: string = 'name';
-  @Input() sortOrder: string = 'asc'
-
   bgColor?: string
 
   constructor(

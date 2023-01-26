@@ -15,8 +15,6 @@
     <li
       *ngFor="
         let taska of list.tasks
-          | filter: filterValue
-          | sort: [sortSelect, sortOrder]
       "
       appDraggable
       (dragstart)="[setCurrentTask(taska), setCurrentList(list.tasks)]"

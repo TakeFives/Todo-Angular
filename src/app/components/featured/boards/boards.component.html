@@ -1,22 +1,21 @@
 <div class="wrapper">
   <div class="top-bar">
     <h1 class="title">{{ title }}</h1>
-    <app-filter (filterTermEvent)="getFilterValue($event)"></app-filter>
+    <app-filter (filterTermEvent)="filterBoards($event)"></app-filter>
     <app-sort 
     (selectedItemEvent)="onSelectedValue($event)" 
-    (ascEvent)="onSortOrder($event)"
-    (descEvent)="onSortOrder($event)"
+    (orderEvent)="onSortOrder($event)"
     ></app-sort>
   </div>
 
   <div class="board-list" >
     <button (click)="[modalService.open(), (mode = 'add')]" class="add-board" title="create new board"></button>
      <app-board
-      *ngFor="let board of boards$ | async | filter: filterValue | sort: [sortSelect, sortOrder]"
+      *ngFor="let board of filteredBoards$ | async"
       [board]="board"
       (modeChangeEvent)="changeMode($event)"
       (getBoardEvent)="getBoard($event)"
-      (click)="goToBoard(board.id)"
+      (click)="goToBoard(board.id!)"
     ></app-board>
     <ng-template #loading>Loading...</ng-template>
 

@@ -1,11 +1,10 @@
 <div class="wrapper">
   <div class="top-bar">
     <h1 *ngIf="board" class="title">{{ board.name }}</h1>
-    <app-filter (filterTermEvent)="getFilterValue($event)"></app-filter>
+    <app-filter (filterTermEvent)="filterLists($event)"></app-filter>
     <app-sort
       (selectedItemEvent)="onSelectedValue($event)"
-      (ascEvent)="onSortOrder($event)"
-      (descEvent)="onSortOrder($event)"
+      (orderEvent)="onSortOrder($event)"
     ></app-sort>
     <button class="delete-board-button" (click)="deleteBoard(board)">
       Delete board
@@ -16,15 +15,12 @@
     <div *ngIf="loading">Loading...</div>
 
     <div class="tasks-groups">
-      <div *ngFor="let list of taskLists | sort: [sortSelect, sortOrder]">
+      <div *ngFor="let list of filteredLists ">
         <app-tasklist
           [boardId]="boardId"
           [list]="list"
           [outTask]="outTask"
           [outList]="outList"
-          [filterValue]="filterValue"
-          [sortSelect]="sortSelect"
-          [sortOrder]="sortOrder"
           (currentTask)="setOutTask($event)"
           (currentList)="setOutList($event)"
           (currentTaskEdit)="setOutTaskEdit($event)"
