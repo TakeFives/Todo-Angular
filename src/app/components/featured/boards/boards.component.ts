@@ -33,7 +33,10 @@ export class BoardsComponent implements OnInit {
 
   ngOnInit() {
     this.boards$ = this.store.select('boards');
-    this.filteredBoards$ = this.boards$;
+    this.filteredBoards$ = this.boards$
+    .pipe(
+      delay(2000)
+    );
   }
 
   changeMode(mode: string) {
@@ -59,7 +62,8 @@ export class BoardsComponent implements OnInit {
   }
 
   filterBoards(value: string) {
-    this.filteredBoards$ = this.boards$.pipe(
+    this.filteredBoards$ = this.store.select('boards')
+    .pipe(
       map((boards) => {
         if (!value.trim()) return boards!
 

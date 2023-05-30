@@ -8,9 +8,9 @@ import { ModalService } from 'src/app/services/modal.service';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit{
 
-  @Input() board!: Board;
+  @Input() board?: Board;
 
   visible = false;
   controls = false;
@@ -23,6 +23,10 @@ export class BoardComponent {
     public modalService: ModalService,
     private store: Store
   ) { }
+
+    ngOnInit(): void {
+      console.log(this.board?.name);
+    }
 
 
   deleteBoard(event:Event, board: Board) {
