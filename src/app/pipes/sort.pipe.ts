@@ -5,12 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SortPipe implements PipeTransform {
   
-  transform(arr: any, args: any[]): any {
+  transform(arrToSort: any, args: [sortBy: string, sortValue: string]): any {
 
-    if (!arr) return
-    if (!args) return arr
+    if (!arrToSort) return
+    if (!args) return arrToSort
 
-    const arrForSort = [...arr]
+    const arrForSort = [...arrToSort]
 
     const sortKey = args[0];
     const sortDirection = args[1];

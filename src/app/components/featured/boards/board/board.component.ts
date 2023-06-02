@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Board } from 'src/app/model/board';
 import { ModalService } from 'src/app/services/modal.service';
@@ -6,9 +6,11 @@ import { ModalService } from 'src/app/services/modal.service';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  styleUrls: ['./board.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
-export class BoardComponent implements OnInit{
+export class BoardComponent {
 
   @Input() board?: Board;
 
@@ -23,10 +25,6 @@ export class BoardComponent implements OnInit{
     public modalService: ModalService,
     private store: Store
   ) { }
-
-    ngOnInit(): void {
-      console.log(this.board?.name);
-    }
 
 
   deleteBoard(event:Event, board: Board) {

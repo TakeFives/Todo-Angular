@@ -16,6 +16,5 @@ export class AppComponent implements OnInit{
 
   ngOnInit(){
     this.store.dispatch({ type: '[App] Load Boards' });
-
   }
 }

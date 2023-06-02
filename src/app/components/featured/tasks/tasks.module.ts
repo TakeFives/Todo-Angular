@@ -10,9 +10,9 @@ import { TasksRoutingModule } from './tasks-routing.module';
 import { CommentsModule } from './task/comments/comments.module';
 
 import { TasksComponent } from './tasks.component';
-import { TaskComponent } from './task/task/task.component';
 import { CreateTaskComponent } from './task/create-task/create-task.component';
 import { TasklistComponent } from './tasklist/tasklist.component';
+import { TaskComponent } from './task/task/task.component';
 import { EditTaskComponent } from './task/edit-task/edit-task.component';
 
 
@@ -37,11 +37,11 @@ import { EditTaskComponent } from './task/edit-task/edit-task.component';
     CommentsModule
   ],
   exports: [
-    TasksComponent,
     TaskComponent,
     CreateTaskComponent,
     TasklistComponent,
     EditTaskComponent,
+    TasksComponent
   ]
 })
 export class TasksModule { }

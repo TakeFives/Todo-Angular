@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FilterBoardsPipe } from 'src/app/pipes/filter.pipe';
+import { FilterPipe } from 'src/app/pipes/filter.pipe';
 import { SortPipe } from 'src/app/pipes/sort.pipe';
 import { TaskStatusPipe } from 'src/app/pipes/task-status.pipe';
 
 @NgModule({
   declarations: [
     TaskStatusPipe,
-    FilterBoardsPipe,
+    FilterPipe,
     SortPipe,
   ],
   imports: [
@@ -15,7 +15,7 @@ import { TaskStatusPipe } from 'src/app/pipes/task-status.pipe';
   ],
   exports: [
     TaskStatusPipe,
-    FilterBoardsPipe,
+    FilterPipe,
     SortPipe,
   ]
 })

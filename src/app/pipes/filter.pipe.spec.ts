@@ -1,19 +1,19 @@
-import { FilterBoardsPipe } from './filter.pipe';
+import { FilterPipe } from './filter.pipe';
 import { tasksMock } from '../mocks/tasks.mock';
 import { boardsMock } from '../mocks/boards.mock';
 
 describe('filter pipe', () => {
 
   it('create an instance', () => {
-    const pipe = new FilterBoardsPipe()
+    const pipe = new FilterPipe()
     expect(pipe).toBeTruthy()
   })
 
   describe('filter boards by board name', () => {
-    let pipe: FilterBoardsPipe;
+    let pipe: FilterPipe;
 
     beforeEach(() => {
-      pipe = new FilterBoardsPipe();
+      pipe = new FilterPipe();
     })
 
     it('should return item which contains `-2`', () => {
@@ -31,10 +31,10 @@ describe('filter pipe', () => {
   })
 
   describe('filter tasks by task name', () => {
-    let pipe: FilterBoardsPipe;
+    let pipe: FilterPipe;
 
     beforeEach(() => {
-      pipe = new FilterBoardsPipe();
+      pipe = new FilterPipe();
     })
 
     it('should return item which contains `new`', () => {

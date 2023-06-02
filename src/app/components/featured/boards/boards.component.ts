@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/services/modal.service';
 import { Board } from 'src/app/model/board';
-import { State, Store } from '@ngrx/store';
-import { delay, filter, map, Observable, of, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { delay, map, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { FilterPipe } from 'src/app/pipes/filter.pipe';
+import { SortPipe } from 'src/app/pipes/sort.pipe';
 
 @Component({
   selector: 'app-boards',
@@ -13,14 +15,10 @@ import { Router } from '@angular/router';
 })
 
 export class BoardsComponent implements OnInit {
-
-  title = 'Dashboard';
-
-  mode: string | undefined;
-
+  title = 'My Boards';
   sortSelect: string = 'name';
   sortOrder: string = 'asc';
-
+  mode: string | undefined;
   board?: Board;
   boards$!: Observable<Board[]>;
   filteredBoards$!: Observable<Board[]>;
@@ -28,14 +26,16 @@ export class BoardsComponent implements OnInit {
   constructor(
     public modalService: ModalService,
     private store: Store<{ boards: Board[] }>,
-    private router: Router
+    private router: Router,
+    private filterPipe: FilterPipe,
+    private sortPipe: SortPipe
   ) { }
 
   ngOnInit() {
     this.boards$ = this.store.select('boards');
     this.filteredBoards$ = this.boards$
     .pipe(
-      delay(2000)
+      delay(100)
     );
   }
 
@@ -65,42 +65,16 @@ export class BoardsComponent implements OnInit {
     this.filteredBoards$ = this.store.select('boards')
     .pipe(
       map((boards) => {
-        if (!value.trim()) return boards!
-
-        return boards!.filter(item => {
-          if (item.tasks) {
-            return item.name.toLowerCase().includes(value ? value.toLowerCase() : '')
-              ||
-              item.tasks.some((task: { name: string; }) => task.name.toLowerCase().includes(value ? value.toLowerCase() : ''))
-          } else {
-            return item.name.toLowerCase().includes(value ? value.toLowerCase() : '')
-          }
-        }
-        )
-      })
-    )
+          return this.filterPipe.transform(boards, value)
+        })
+      )
   }
 
   sortBoards() {
     this.filteredBoards$ = this.filteredBoards$
       .pipe(
         map(boards => {
-          const sortBoards = [...boards]
-
-          let mult = 1
-          if (this.sortOrder === 'desc') {
-            mult = -1
-          }
-
-          return sortBoards.sort((a: any, b: any) => {
-            if (a[this.sortSelect] < b[this.sortSelect]) {
-              return -1 * mult;
-            } else if (a[this.sortSelect] > b[this.sortSelect]) {
-              return 1 * mult;
-            } else {
-              return 0;
-            }
-          })
+          return this.sortPipe.transform(boards, [this.sortSelect, this.sortOrder])
         })
       )
 

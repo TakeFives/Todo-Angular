@@ -2,12 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './components/featured/auth/auth.guard';
 
-// const routes: Routes = [
-//   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-//   {path: 'dashboard', component: BoardsComponent, data: {title: 'Dashboard'}},
-//   {path: 'board/:id', component: TasksComponent}
-// ];
-
 const routes: Routes = [
   {
     path: 'auth',

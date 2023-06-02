@@ -6,19 +6,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DraggableModule } from 'src/app/directives/dragndrop/draggable.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
-import { BoardsRoutingModule } from './boards-routing.module';
 
-import { CreateBoardComponent } from './board/create-board/create-board.component';
-import { EditBoardComponent } from './board/edit-board/edit-board.component';
-import { BoardComponent } from './board/board/board.component';
+import { CreateBoardComponent } from './create-board/create-board.component';
+import { EditBoardComponent } from './edit-board/edit-board.component';
+import { BoardComponent } from './board/board.component';
 import { BoardsComponent } from './boards.component';
+import { BoardsRoutingModule } from './boards-routing.module';
 
 @NgModule({
   declarations: [
     CreateBoardComponent,
     EditBoardComponent,
     BoardComponent,
-    BoardsComponent,
+    BoardsComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +35,7 @@ import { BoardsComponent } from './boards.component';
     CreateBoardComponent,
     EditBoardComponent,
     BoardComponent,
-    BoardsComponent,
+    BoardsComponent
   ]
 })
 export class BoardsModule { }

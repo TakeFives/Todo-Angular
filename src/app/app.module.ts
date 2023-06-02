@@ -8,7 +8,6 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './components/core/core.module';
-import { FeaturedModule } from './components/featured/featured.module';
 import { SharedModule } from './components/shared/shared.module';
 
 import { BoardsEffects } from './state/effects/boards.effects';
@@ -19,6 +18,10 @@ import { boardsReducer } from './state/reducers/main.reducer';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
+import { FeaturedModule } from './components/featured/featured.module';
+import { FilterPipe } from './pipes/filter.pipe';
+import { SortPipe } from './pipes/sort.pipe';
+
 
 @NgModule({
   declarations: [
@@ -33,13 +36,13 @@ import { AppComponent } from './app.component';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ 
+    StoreModule.forRoot({
       boards: boardsReducer
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([BoardsEffects, TasksEffects])
   ],
-  providers: [Title],
+  providers: [Title, FilterPipe, SortPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
